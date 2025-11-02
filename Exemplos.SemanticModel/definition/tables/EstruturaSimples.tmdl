@@ -1,0 +1,31 @@
+table EstruturaSimples
+	lineageTag: 3577a3ca-337a-4212-bba6-b0c3fd247c58
+
+	column EstruturaSimples
+		dataType: double
+		lineageTag: bdbb1187-9103-4da8-8f52-d0a439cce68b
+		summarizeBy: sum
+		sourceColumn: EstruturaSimples
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition EstruturaSimples = m
+		mode: import
+		source =
+				let
+				    Etapa1 = "a",
+				    Etapa2 = "b",
+				    #"Etapa 3" = 50,
+				    num1 = 10,
+				    num2 = 2,
+				    num3 = 50,
+				    num4 = num3 * num2 / num1
+				in
+				    num4
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Number
+

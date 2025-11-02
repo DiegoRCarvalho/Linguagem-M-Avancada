@@ -1,0 +1,40 @@
+table EstruturaAninhada
+	lineageTag: b6b3d0f3-8980-423b-ba0e-ffe97de72472
+
+	column EstruturaAninhada
+		dataType: double
+		lineageTag: 5e8b0ed6-e57a-42a4-9a4b-71f123a976ac
+		summarizeBy: sum
+		sourceColumn: EstruturaAninhada
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition EstruturaAninhada = m
+		mode: import
+		source = ```
+				let
+				    etapa1 = 5,
+				    etapa2 = 
+				        let
+				            etapa3 = 600
+				        in
+				            etapa3,
+				
+				    // Exemplo de erro de escopo e irá retornar a seguinte mensagem: Expression.Error: O nome 'etapa3' não foi reconhecido. Certifique-se de que ele foi soletrado corretamente.
+				    // remova o comentário abaixo para ver o erro.
+				    // etapa4 = etapa3 / etapa1
+				    
+				    // correção da etapa comentada acima.        
+				    etapa4 = etapa2 / etapa1
+				
+				    
+				in
+				    etapa4
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Number
+
