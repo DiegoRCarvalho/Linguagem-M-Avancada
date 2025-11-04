@@ -1,0 +1,98 @@
+expression Lista =
+		let
+		    Fonte1 = {1, 2, 3},
+		    Fonte2 = {1, 2, 3, "Diego"},
+		    Fonte3 = {{1,2,3},{"a","b","c"}},
+		    Fonte4 = {20, 35, 40}{0},
+		    Fonte5 = {1 .. 100},
+		    Fonte6 = {1,2,3} & {4 .. 10}
+		in
+		    Fonte6
+	lineageTag: 32a61d6e-9744-44bf-a7d4-a32363d43912
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = List
+
+expression Registro =
+		let
+		    Fonte = [
+		        Coluna1 = "Produto X",
+		        Coluna2 = "Região Y",
+		        Coluna3 = 680,
+		        Coluna4 = {1001, 1006, 1008},
+		        Coluna5 = [
+		            ColunaX = 600,
+		            ColunaW = "Vendedor1"
+		        ]
+		    ]
+		in
+		    Fonte
+	lineageTag: 68441b80-2d55-45d0-b482-288e379c4ec0
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Record
+
+expression Tabela = ```
+		let
+		    Fonte = 
+		    #table(
+		        {"Nome", "Idade"},
+		        {
+		            {"Diego",43},
+		            {"Bia", 26}
+		        }
+		    )
+		in
+		    Fonte
+		```
+	lineageTag: 083b1691-5517-4436-b816-d0186a8de31a
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression EstruturaSimples =
+		let
+		    Etapa1 = "a",
+		    Etapa2 = "b",
+		    #"Etapa 3" = 50,
+		    num1 = 10,
+		    num2 = 2,
+		    num3 = 50,
+		    num4 = num3 * num2 / num1
+		in
+		    num4
+	lineageTag: b9111656-93d9-4b2e-9b83-0b9bec405ece
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Number
+
+expression EstruturaAninhada = ```
+		let
+		    etapa1 = 5,
+		    etapa2 = 
+		        let
+		            etapa3 = 600
+		        in
+		            etapa3,
+		
+		    // Exemplo de erro de escopo e irá retornar a seguinte mensagem: Expression.Error: O nome 'etapa3' não foi reconhecido. Certifique-se de que ele foi soletrado corretamente.
+		    // remova o comentário abaixo para ver o erro.
+		    // etapa4 = etapa3 / etapa1
+		    
+		    // correção da etapa comentada acima.        
+		    etapa4 = etapa2 / etapa1
+		
+		    
+		in
+		    etapa4
+		```
+	lineageTag: 8a222f59-39a7-4ae9-8834-d6316598b320
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Number
+
