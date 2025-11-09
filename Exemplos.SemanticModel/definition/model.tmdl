@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["EstruturaSimples","EstruturaAninhada","Lista","Registro","Tabela","ListaFunções","Usando Funções"]
+annotation PBI_QueryOrder = ["EstruturaSimples","EstruturaAninhada","Lista","Registro","Tabela","ListaFunções","Usando Funções","Pedidos"]
 
 annotation PBI_ProTooling = ["DevMode"]
 

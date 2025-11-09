@@ -131,3 +131,65 @@ expression 'Usando Funções' =
 
 	annotation PBI_ResultType = List
 
+expression Pedidos = ```
+		let
+		
+		    // Informar o diretório onde iremos importar os arquivos
+		    ImportarArquivos = Folder.Files("Z:\certificacao\DataDriven\Formação em Power BI - M Avançado\arquivos\Pedidos"),
+		    
+		    // Remover colunas desnecessárias
+		    RemoverColunas1 = Table.SelectColumns(ImportarArquivos,{"Content"}),
+		
+		    // Adicionar coluna personalizada transformando os dados binários de Content em Tabelas
+		    AcessarDadosDoExcel = Table.AddColumn(RemoverColunas1, "TransformarBinarioEmTabela", each Excel.Workbook([Content])),
+		
+		    // Remover a coluna Content já que ela não é mais necessária
+		    RemoverColunas2 = Table.RemoveColumns(AcessarDadosDoExcel,{"Content"}),
+		
+		    // Da tabela anterior, precisamos apenas dos dados contidos na coluna Data(dados em inglês)
+		    ExpandirTabelaDeDados = Table.ExpandTableColumn(RemoverColunas2, "TransformarBinarioEmTabela", {"Data"}, {"Dados"}),
+		
+		    // Adicionar coluna personalizada promovendo os cabeçalhos
+		    PromoverCabecalhos = Table.AddColumn(ExpandirTabelaDeDados, "PromoverCabecalhos", each Table.PromoteHeaders([Dados])),
+		
+		    // Remover a coluna Dados já que ela não é mais necessária
+		    RemoverColunas3 = Table.RemoveColumns(PromoverCabecalhos,{"Dados"}),
+		
+		    // Expandir tabela pronta
+		    ExpandirTabelaFinal = Table.ExpandTableColumn(
+		        RemoverColunas3, "PromoverCabecalhos", {
+		            "Código do Pedido", 
+		            "Ano", 
+		            "Mês", 
+		            "Dia", 
+		            "ID Produto", 
+		            "ID Loja", 
+		            "Quantidade", 
+		            "Preço Unitário", 
+		            "Tipo Venda"
+		        }
+		    ),
+		    
+		    // Tipar colunas
+		    TipoAlterado = Table.TransformColumnTypes(
+		        ExpandirTabelaFinal,{
+		            {"Código do Pedido", Int64.Type}, 
+		            {"Ano", Int64.Type}, 
+		            {"Mês", Int64.Type}, 
+		            {"Dia", Int64.Type}, 
+		            {"ID Produto", Int64.Type}, 
+		            {"ID Loja", Int64.Type}, 
+		            {"Quantidade", Int64.Type}, 
+		            {"Preço Unitário", Int64.Type}, 
+		            {"Tipo Venda", type text}
+		        }
+		    )
+		in
+		    TipoAlterado
+		```
+	lineageTag: dbe66bfe-c9a1-4661-8e90-e5f0b9b7b920
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
