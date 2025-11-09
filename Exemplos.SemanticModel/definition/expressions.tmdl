@@ -109,3 +109,25 @@ expression ListaFunções =
 
 	annotation PBI_ResultType = Table
 
+expression 'Usando Funções' =
+		let
+		    // Transformar texto em número
+		    A = "20",
+		    B = 100,
+		    C = Number.FromText(A) * B,
+		
+		    // Extrair texto após o delimitador e transformar em número
+		    D = "F-8543",
+		    E = Number.FromText(Text.AfterDelimiter(D, "-")),
+		
+		    // Ordenar lista
+		    F = {56,78,2,73,8,4},
+		    G = List.Sort(F)
+		in
+		    G
+	lineageTag: a619bbf7-99df-4527-a8d1-58c48d405720
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = List
+
